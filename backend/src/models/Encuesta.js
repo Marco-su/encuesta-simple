@@ -11,7 +11,7 @@ const EncuestaSchema = new Schema(
     prom_twitter: { type: Number, required: true },
     prom_tiktok: { type: Number, required: true },
     prom_ig: { type: Number, required: true },
-    prom_pinterest: { type: Number, required: true },
+    prom_otra: { type: Number, required: true },
   },
   { timestamps: true }
 );

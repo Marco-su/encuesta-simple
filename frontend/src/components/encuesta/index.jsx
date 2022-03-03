@@ -1,6 +1,7 @@
 import Formulario from "./Formulario";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
+import { createDocument } from "../../helpers/queries";
 
 export default function Encuesta() {
   // Inits
@@ -78,19 +79,54 @@ export default function Encuesta() {
 
   // Handles
   const onSubmit = (data) => {
+    let thereAreErrors = false;
+
     redes.forEach((el) => {
       if (isHours[`${el}-units`] === false && data[`${el}-input`] > 1440) {
+        thereAreErrors = true;
         setError(`${el}-input`, {
           type: "manual",
           message: "Un día tiene 1440 minutos, el número debe ser menor",
         });
+
+        //--
       } else if (isHours[`${el}-units`] === true && data[`${el}-input`] > 24) {
+        thereAreErrors = true;
         setError(`${el}-input`, {
           type: "manual",
           message: "Un día tiene 24 horas, el número debe ser menor",
         });
       }
     });
+
+    if (!thereAreErrors) {
+      let newData = {};
+
+      const { sexo, edad, correo, favorita } = data;
+      newData = { sexo, edad, correo, favorita };
+
+      redes.forEach((el) => {
+        if (data[`${el}-input`]) {
+          isHours[`${el}-units`]
+            ? (newData[`prom_${el}`] = data[`${el}-input`] * 60)
+            : (newData[`prom_${el}`] = Number(data[`${el}-input`]));
+        } else {
+          newData[`prom_${el}`] = 0;
+        }
+      });
+
+      createDocument(newData)
+        .then((res) => {
+          if (res.data.success) {
+            console.log(res);
+          } else {
+            console.log(res);
+          }
+        })
+        .catch((err) => {
+          console.log("Error al crear documento:", err);
+        });
+    }
   };
 
   const handleCheckbox = (e) => {

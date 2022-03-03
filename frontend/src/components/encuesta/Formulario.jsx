@@ -68,12 +68,12 @@ export default function Formulario({
 
             <select {...rules.favorita}>
               <option value="">Seleccionar</option>
-              <option value="masculino">Facebook</option>
-              <option value="femenino">Instagram</option>
-              <option value="otro">Twitter</option>
-              <option value="otro">WhatsApp</option>
-              <option value="otro">TikTok</option>
-              <option value="otro">Otra</option>
+              <option value="fb">Facebook</option>
+              <option value="ig">Instagram</option>
+              <option value="twitter">Twitter</option>
+              <option value="wa">WhatsApp</option>
+              <option value="tiktok">TikTok</option>
+              <option value="otra">Otra</option>
             </select>
           </label>
 

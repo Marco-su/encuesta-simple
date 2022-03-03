@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 mongoose
-  .connect("mongodb://localhost:27017/enquTest", {
+  .connect(process.env.URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })

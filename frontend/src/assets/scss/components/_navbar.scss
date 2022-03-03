@@ -1,0 +1,50 @@
+@use "../utils/extends"as e;
+@use "../utils/variables"as v;
+
+.main-nav {
+  @extend %flex;
+  @extend %flex-align-center;
+  height: 60px;
+  background: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 998;
+  padding: 0 1rem;
+  font-size: 1.2rem;
+
+  a {
+    text-decoration: none;
+    padding: 0.3rem .8rem;
+    border-radius: 1000px;
+    transition: v.$transition-time;
+  }
+
+  &__logo {
+    @include e.flex-grow;
+    
+    a{
+      font-weight: 600;
+      letter-spacing: 1px;
+      font-size: 1.4rem;
+      color: v.$main-blue;
+    }
+  }
+
+  &__links {
+    @extend %flex;
+    list-style: none;
+
+    li {
+      margin-left: .8rem;
+
+      a {
+        color: #222;
+
+        &:hover{
+          color: #333;
+          background-color: #dedede;
+        }
+      }
+    }
+  }
+}

@@ -2,10 +2,15 @@ import Formulario from "./Formulario";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { createDocument } from "../../helpers/queries";
+import { useNavigate } from "react-router-dom";
 
 export default function Encuesta() {
   // Inits
+  const navigate = useNavigate();
+
   const redes = ["fb", "ig", "wa", "tiktok", "twitter", "otras"];
+
+  const [errorOnSubmit, setErrorOnSubmit] = useState("");
 
   const [isHours, setIsHours] = useState({
     "fb-units": false,
@@ -106,7 +111,9 @@ export default function Encuesta() {
       newData = { sexo, edad, correo, favorita };
 
       redes.forEach((el) => {
-        if (data[`${el}-input`]) {
+        if (isChecked[`${el}-check`]) {
+          newData[`prom_${el}`] = 0;
+        } else if (data[`${el}-input`]) {
           isHours[`${el}-units`]
             ? (newData[`prom_${el}`] = data[`${el}-input`] * 60)
             : (newData[`prom_${el}`] = Number(data[`${el}-input`]));
@@ -118,13 +125,13 @@ export default function Encuesta() {
       createDocument(newData)
         .then((res) => {
           if (res.data.success) {
-            console.log(res);
+            navigate("/estadisticas");
           } else {
-            console.log(res);
+            setErrorOnSubmit(res.data.message);
           }
         })
         .catch((err) => {
-          console.log("Error al crear documento:", err);
+          setErrorOnSubmit("Error al crear documento:");
         });
     }
   };
@@ -161,6 +168,7 @@ export default function Encuesta() {
       clearErrors={clearErrors}
       rulesInputs={rulesInputs}
       rules={rules}
+      errorOnSubmit={errorOnSubmit}
     />
   );
 }

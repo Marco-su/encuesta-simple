@@ -12,24 +12,28 @@ export default function Formulario({
   clearErrors,
   control,
   rulesInputs,
+  errorOnSubmit,
 }) {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <h2>Información</h2>
 
-      <div>
+      <div className="inputsBox mb-4">
         <div>
           <label>
-            <span>Correo electrónico</span>
+            <span className="me-2">Correo electrónico</span>
+
             <input type="email" placeholder="Correo" {...rules.correo} />
           </label>
 
-          {errors.correo ? <span>{errors.correo.message}</span> : null}
+          {errors.correo ? (
+            <span className="errorSpan">{errors.correo.message}</span>
+          ) : null}
         </div>
 
         <div>
           <label>
-            <span>Edad</span>
+            <span className="me-2">Edad</span>
 
             <select {...rules.edad}>
               <option value="">Seleccionar</option>
@@ -40,12 +44,14 @@ export default function Formulario({
             </select>
           </label>
 
-          {errors.edad ? <span>{errors.edad.message}</span> : null}
+          {errors.edad ? (
+            <span className="errorSpan">{errors.edad.message}</span>
+          ) : null}
         </div>
 
         <div>
           <label>
-            <span>Sexo</span>
+            <span className="me-2">Sexo</span>
 
             <select {...rules.sexo}>
               <option value="">Seleccionar</option>
@@ -55,16 +61,18 @@ export default function Formulario({
             </select>
           </label>
 
-          {errors.sexo ? <span>{errors.sexo.message}</span> : null}
+          {errors.sexo ? (
+            <span className="errorSpan">{errors.sexo.message}</span>
+          ) : null}
         </div>
       </div>
 
       <h2>Redes Sociales</h2>
 
       <div>
-        <div>
+        <div className="mb-4">
           <label>
-            <span>Red social favorita</span>
+            <span className="me-2">Red social favorita</span>
 
             <select {...rules.favorita}>
               <option value="">Seleccionar</option>
@@ -77,98 +85,108 @@ export default function Formulario({
             </select>
           </label>
 
-          {errors.favorita ? <span>{errors.favorita.message}</span> : null}
+          {errors.favorita ? (
+            <span className="errorSpan">{errors.favorita.message}</span>
+          ) : null}
         </div>
 
         <h3>¿Cuanto tiempo usas cada red social durante el día?</h3>
 
-        <RedesInputs
-          title="Facebook"
-          red="fb"
-          text="Facebook"
-          handleRadio={handleRadio}
-          isHours={isHours}
-          handleCheckbox={handleCheckbox}
-          isChecked={isChecked}
-          clearErrors={clearErrors}
-          control={control}
-          rules={rules}
-          rulesInputs={rulesInputs}
-          errors={errors}
-        />
-        <RedesInputs
-          title="Instagram"
-          red="ig"
-          text="Instagram"
-          handleRadio={handleRadio}
-          isHours={isHours}
-          handleCheckbox={handleCheckbox}
-          isChecked={isChecked}
-          clearErrors={clearErrors}
-          control={control}
-          rules={rules}
-          rulesInputs={rulesInputs}
-          errors={errors}
-        />
-        <RedesInputs
-          title="Twitter"
-          red="twitter"
-          text="Twitter"
-          handleRadio={handleRadio}
-          isHours={isHours}
-          handleCheckbox={handleCheckbox}
-          isChecked={isChecked}
-          clearErrors={clearErrors}
-          control={control}
-          rules={rules}
-          rulesInputs={rulesInputs}
-          errors={errors}
-        />
-        <RedesInputs
-          title="WhatsApp"
-          red="wa"
-          text="WhatsApp"
-          handleRadio={handleRadio}
-          isHours={isHours}
-          handleCheckbox={handleCheckbox}
-          isChecked={isChecked}
-          clearErrors={clearErrors}
-          control={control}
-          rules={rules}
-          rulesInputs={rulesInputs}
-          errors={errors}
-        />
-        <RedesInputs
-          title="TikTok"
-          red="tiktok"
-          text="TikTok"
-          handleRadio={handleRadio}
-          isHours={isHours}
-          handleCheckbox={handleCheckbox}
-          isChecked={isChecked}
-          clearErrors={clearErrors}
-          control={control}
-          rules={rules}
-          rulesInputs={rulesInputs}
-          errors={errors}
-        />
-        <RedesInputs
-          title="Otras"
-          red="otras"
-          text="otras redes sociales"
-          handleRadio={handleRadio}
-          isHours={isHours}
-          handleCheckbox={handleCheckbox}
-          isChecked={isChecked}
-          clearErrors={clearErrors}
-          control={control}
-          rules={rules}
-          rulesInputs={rulesInputs}
-          errors={errors}
-        />
+        <div className="inputsBox my-4">
+          <RedesInputs
+            title="Facebook"
+            red="fb"
+            text="Facebook"
+            handleRadio={handleRadio}
+            isHours={isHours}
+            handleCheckbox={handleCheckbox}
+            isChecked={isChecked}
+            clearErrors={clearErrors}
+            control={control}
+            rules={rules}
+            rulesInputs={rulesInputs}
+            errors={errors}
+          />
+          <RedesInputs
+            title="Instagram"
+            red="ig"
+            text="Instagram"
+            handleRadio={handleRadio}
+            isHours={isHours}
+            handleCheckbox={handleCheckbox}
+            isChecked={isChecked}
+            clearErrors={clearErrors}
+            control={control}
+            rules={rules}
+            rulesInputs={rulesInputs}
+            errors={errors}
+          />
+          <RedesInputs
+            title="Twitter"
+            red="twitter"
+            text="Twitter"
+            handleRadio={handleRadio}
+            isHours={isHours}
+            handleCheckbox={handleCheckbox}
+            isChecked={isChecked}
+            clearErrors={clearErrors}
+            control={control}
+            rules={rules}
+            rulesInputs={rulesInputs}
+            errors={errors}
+          />
+          <RedesInputs
+            title="WhatsApp"
+            red="wa"
+            text="WhatsApp"
+            handleRadio={handleRadio}
+            isHours={isHours}
+            handleCheckbox={handleCheckbox}
+            isChecked={isChecked}
+            clearErrors={clearErrors}
+            control={control}
+            rules={rules}
+            rulesInputs={rulesInputs}
+            errors={errors}
+          />
+          <RedesInputs
+            title="TikTok"
+            red="tiktok"
+            text="TikTok"
+            handleRadio={handleRadio}
+            isHours={isHours}
+            handleCheckbox={handleCheckbox}
+            isChecked={isChecked}
+            clearErrors={clearErrors}
+            control={control}
+            rules={rules}
+            rulesInputs={rulesInputs}
+            errors={errors}
+          />
+          <RedesInputs
+            title="Otras"
+            red="otras"
+            text="otras redes sociales"
+            handleRadio={handleRadio}
+            isHours={isHours}
+            handleCheckbox={handleCheckbox}
+            isChecked={isChecked}
+            clearErrors={clearErrors}
+            control={control}
+            rules={rules}
+            rulesInputs={rulesInputs}
+            errors={errors}
+          />
+        </div>
       </div>
 
-      <button type="submit">Terminar</button>
+      {errorOnSubmit ? (
+        <span className="errorSpan mb-3">{errorOnSubmit}</span>
+      ) : null}
+
+      <button className="pill-button" type="submit">
+        Terminar
+      </button>
     </form>
   );
 }

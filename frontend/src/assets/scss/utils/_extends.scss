@@ -1,0 +1,125 @@
+@use "./variables" as v;
+
+@mixin calendar-color($color) {
+  background-color: $color;
+
+  &:hover {
+    background-color: darken($color, 6%);
+  }
+}
+
+@mixin flex-grow($value: 1) {
+  -webkit-box-flex: $value;
+  -ms-flex-positive: $value;
+  flex-grow: $value;
+}
+
+@mixin grid($count, $min, $max) {
+  display: grid;
+  display: -ms-grid;
+  grid-template-columns: repeat($count, minmax($min, $max));
+}
+
+@mixin translate($X, $Y) {
+  -webkit-transform: translate($X, $Y);
+  transform: translate($X, $Y);
+}
+
+@mixin translateX($value) {
+  -webkit-transform: translateX($value);
+  -ms-transform: translateX($value);
+  transform: translateX($value);
+}
+
+@mixin translateY($value) {
+  -webkit-transform: translateY($value);
+  -ms-transform: translateY($value);
+  transform: translateY($value);
+}
+
+@mixin transition($tipe: all) {
+  -webkit-transition: $tipe v.$transition-time ease;
+  -o-transition: $tipe v.$transition-time ease;
+  transition: $tipe v.$transition-time ease;
+}
+
+@mixin keyframe($name, $time, $count) {
+  -webkit-animation-name: $name;
+  animation-name: $name;
+  -webkit-animation-duration: $time;
+  animation-duration: $time;
+  -webkit-animation-iteration-count: $count;
+  animation-iteration-count: $count;
+}
+
+%flex {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+%flex-align-center {
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+%flex-justify-between {
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+}
+
+%flex-justify-center {
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+%flex-justify-end {
+  -webkit-box-pack: end;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+}
+
+%flex-column {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+%text-overflow {
+  -o-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+%view-box-circle {
+  width: 100%;
+  background-color: v.$background-blue;
+  padding: 15px;
+  border-radius: v.$border-radius;
+  overflow: hidden;
+  position: relative;
+
+  &::before {
+    @include keyframe(horizontalMove, 350s, infinite);
+    content: "";
+    width: 200%;
+    height: 250%;
+    position: absolute;
+    top: -75%;
+    left: -150%;
+    border-radius: 0 50% 50% 0;
+    background-color: v.$main-blue;
+  }
+}
+
+%small-scrollbar {
+  &::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+  }
+}

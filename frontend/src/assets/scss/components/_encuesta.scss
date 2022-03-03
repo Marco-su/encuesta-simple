@@ -1,0 +1,19 @@
+@use "../utils/extends"as e;
+@use "../utils/variables"as v;
+
+.errorSpan {
+    display: block;
+    font-size: .85rem;
+    color: v.$main-red;
+    margin-top: 5px;
+}
+
+.inputsBox {
+    @include e.grid(auto-fit, 250px, 400px);
+    gap: 1.5rem 0;
+
+    .redesInputs{
+        @extend %flex;
+        @extend %flex-column;
+    }    
+}
